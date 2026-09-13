@@ -71,7 +71,6 @@
 
         header{text-align:center; margin-bottom:15px;}
 
-        /* REVISI BRAND HEADER FONT */
         .brand-title {
             font-size: 18px;
             font-weight: 700;
@@ -81,7 +80,6 @@
             text-transform: uppercase;
         }
 
-        /* LOGIN / AUTH BOX */
         .center-login {
             display: flex;
             flex-direction: column;
@@ -228,7 +226,6 @@
 <div class="wrap" id="captureArea">
     <header id="mainHeader">
         <h1 style="font-size: 16px; color: #64748b; margin:0; font-weight: 500;">TRYOUT TES KECERMATAN GAMBAR</h1>
-        <!-- NAMA BRAND DIPERBESAR DAN DIPERJELAS -->
         <p class="brand-title">Persona Research & Consulting</p>
     </header>
 
@@ -252,7 +249,6 @@
             <input type="text" id="username" placeholder="Ketik nama lengkap..." autocomplete="off">
         </div>
 
-        <!-- REVISI KETERANGAN PILIHAN SET SOAL -->
         <div class="form-group">
             <label class="form-label">Pilih Set Gambar Soal: <br><span>(Klik menu di bawah untuk mengganti variasi soal)</span></label>
             <select id="kategoriSoal">
@@ -263,6 +259,9 @@
                 <option value="pohon">🌲 Set Pohon & Hutan</option>
                 <option value="hewan">🦁 Set Hewan Darat</option>
                 <option value="manusia">👤 Set Siluet Manusia</option>
+                <option value="emoji_jelas">😀 Set Emoji Ekspresi (Universal)</option>
+                <option value="simbol">★ Set Simbol & Bentuk Klasik</option>
+                <option value="mix">🌀 Set Mix Gambar (Kombinasi Kategori Visual)</option>
             </select>
         </div>
 
@@ -479,10 +478,32 @@
         ],
         manusia: [
             ["👤", "👥", "🏃", "🚶", "🧍"], ["🧎", "🕺", "💃", "🧗", "🤺"],
-            ["👮", "🕵️", "🥷", "👷"], ["🤴", "👸", "👳", "👲", "🧕"],
+            ["👮", "🕵️", "🥷", "👷", "💂"], ["🤴", "👸", "👳", "👲", "🧕"],
             ["👤", "🏃", "🧍", "🕺", "👮"], ["👥", "🚶", "🧎", "💃", "🕵️"],
-            ["🧗", "🤺", "🏃", "👷"], ["👤", "🧍", "🕺", "👮", "💂"],
+            ["🧗", "🤺", "🏃", "👷", "💂"], ["👤", "🧍", "🕺", "👮", "💂"],
             ["🏃", "🚶", "💃", "🕵️", "🥷"], ["👥", "🧍", "🧗", "👮", "👷"]
+        ],
+        emoji_jelas: [
+            ["😀", "😃", "😄", "😁", "😆"], ["😅", "😂", "🤣", "😊", "😇"],
+            ["🙂", "🙃", "😉", "😌", "😍"], ["🥰", "😘", "😗", "😙", "😚"],
+            ["😋", "😛", "😝", "😜", "🤪"], ["🤨", "🧐", "🤓", "😎", "🤩"],
+            ["🥳", "😏", "😒", "😞", "😔"], ["😟", "😕", "🙁", "☹️", "😣"],
+            ["😖", "😫", "😩", "🥺", "😢"], ["😭", "😤", "😠", "😡", "🤬"]
+        ],
+        simbol: [
+            ["★", "▲", "■", "●", "◆"], ["✦", "▼", "▰", "◯", "◈"],
+            ["★", "✦", "▲", "▼", "◼"], ["●", "◯", "◆", "◈", "✦"],
+            ["▲", "■", "●", "★", "✦"], ["▼", "▰", "◯", "◆", "◈"],
+            ["★", "▲", "◆", "●", "▼"], ["✦", "■", "◈", "◯", "▰"],
+            ["▲", "▼", "★", "✦", "■"], ["●", "◯", "◆", "◈", "▰"]
+        ],
+        // SET MIX TERBARU (MURNI GAMBAR / VISUAL AMBIGU & VARIASI KATEGORI)
+        mix: [
+            ["🌵", "🏠", "🦁", "⛵", "★"], ["🐬", "🌲", "👤", "🚀", "▲"],
+            ["🚗", "🌴", "🦅", "🗿", "■"], ["🍕", "⛪", "🐙", "👑", "●"],
+            ["🚁", "🍁", "🦊", "🕌", "◆"], ["⚽", "🏖️", "🦉", "🎪", "✦"],
+            ["🚲", "🍄", "🦭", "🏰", "▼"], ["🎸", "🌻", "🐧", "🗽", "◯"],
+            ["🏆", "🪵", "🦚", "⛩️", "◈"], ["💎", "🪴", "🦄", "🏛️", "▰"]
         ]
     };
 
@@ -550,17 +571,36 @@
     function nextSoal() {
         const missingIdx = Math.floor(Math.random() * 5);
         const correctLabel = String.fromCharCode(65 + missingIdx);
-        const display = shuffleArray(activeChars.filter((_, i) => i !== missingIdx));
+
+        const display = [];
+        for (let i = 0; i < activeChars.length; i++) {
+            if (i !== missingIdx) {
+                display.push(activeChars[i]);
+            }
+        }
+
+        const shuffledDisplay = shuffleArray(display);
+
         const soalCont = document.getElementById('soalCont');
-        soalCont.innerHTML = display.map(s => `<span class="symbol-black">${s}</span>`).join('');
+        soalCont.innerHTML = shuffledDisplay
+            .map(s => `<span class="symbol-black">${s}</span>`)
+            .join('');
+
         const cont = document.getElementById('pilihan');
         cont.innerHTML = '';
-        ['A','B','C','D','E'].forEach(l => {
+        const labels = ['A', 'B', 'C', 'D', 'E'];
+        
+        labels.forEach((l) => {
             const btn = document.createElement('button');
-            btn.className = 'pilihan-btn'; btn.textContent = l;
+            btn.className = 'pilihan-btn';
+            btn.textContent = l;
             btn.onclick = () => { 
                 results[currentIdx].t++; 
-                if(l === correctLabel) results[currentIdx].b++; else results[currentIdx].s++; 
+                if(l === correctLabel) {
+                    results[currentIdx].b++; 
+                } else {
+                    results[currentIdx].s++; 
+                }
                 nextSoal(); 
             };
             cont.appendChild(btn);
