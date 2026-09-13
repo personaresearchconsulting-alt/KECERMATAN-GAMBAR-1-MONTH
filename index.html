@@ -11,6 +11,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome CDN untuk Siluet Emoji Berlubang/Clear -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -60,7 +63,7 @@
             min-height: 92vh;
         }
         
-        /* Filter Siluet untuk Gambar/Simbol Biasa */
+        /* DENGAN KEMBALI KE SILUET HITAM PEKAT 100% */
         .symbol-black { 
             display: inline-block;
             line-height: 1;
@@ -70,14 +73,12 @@
             -webkit-filter: grayscale(100%) brightness(0) contrast(200%);
         }
 
-        /* Filter Hitam Putih Khusus Emoji (Mempertahankan Detail Ekspresi Mata & Mulut) */
-        .symbol-emoji {
+        /* KHUSUS EMOJI IKON VEKTOR PEKAT TANPA FILTER PUDAR */
+        .emoji-icon {
             display: inline-block;
             line-height: 1;
             vertical-align: middle;
-            font-family: 'Noto Color Emoji', sans-serif;
-            filter: grayscale(100%) contrast(150%) brightness(0.9);
-            -webkit-filter: grayscale(100%) contrast(150%) brightness(0.9);
+            color: #000000; /* Hitam Pekat */
         }
 
         header{text-align:center; margin-bottom:15px;}
@@ -191,10 +192,10 @@
 
         #testArea{ display:none; flex-direction:column; align-items:center; gap:12px; flex-grow: 1; justify-content: center; }
         .acuan-table{ border-collapse:collapse; margin-bottom:5px; table-layout: fixed; width: 100%; max-width: 450px; }
-        .acuan-table td{ border:2px solid var(--navy); height:75px; text-align:center; font-size:50px; background:#fff; vertical-align: middle; }
+        .acuan-table td{ border:2px solid var(--navy); height:75px; text-align:center; font-size:45px; background:#fff; vertical-align: middle; }
         .acuan-table td.label{ background:var(--navy); color:#fff; font-size:18px; height:30px; font-weight:bold; }
 
-        .soal-box{ font-size:58px; letter-spacing:12px; padding:12px; background:var(--gray); border-radius:15px; min-height:80px; width: 100%; max-width: 450px; text-align: center; display: flex; justify-content: center; align-items: center; gap: 12px; }
+        .soal-box{ font-size:52px; letter-spacing:12px; padding:12px; background:var(--gray); border-radius:15px; min-height:80px; width: 100%; max-width: 450px; text-align: center; display: flex; justify-content: center; align-items: center; gap: 12px; }
         
         .pilihan-grid{ display:grid; grid-template-columns:repeat(5, 1fr); gap:10px; width:100%; max-width:450px; margin-bottom: 10px; }
         .pilihan-btn{ background:#fff; border:2px solid var(--navy); padding:15px 0; font-size:22px; font-weight:700; border-radius:10px; cursor:pointer; box-shadow: 0 4px 0 var(--btn-shadow); }
@@ -211,9 +212,6 @@
         .table-res{ width:100%; border-collapse:collapse; font-size: 11px; margin-top: 15px; }
         .table-res th, .table-res td{ border:1px solid #cbd5e1; padding:8px; text-align:center; }
         .table-res th{ background:var(--navy); color:#fff; }
-        .kat-badge{ display:inline-block; padding:3px 8px; border-radius:15px; font-size:9px; font-weight:bold; margin-top:5px; text-transform:uppercase; }
-        .bg-sukses{ background:#dcfce7; color:#166534; }
-        .bg-bahaya{ background:#fee2e2; color:#991b1b; }
 
         .popup{
             position:fixed; top:20px; right:20px; background:#0f172a; color:white;
@@ -240,7 +238,6 @@
         <p class="brand-title">Persona Research & Consulting</p>
     </header>
 
-    <!-- STEP 1: AUTHENTICATION PASSWORD -->
     <div id="authBox" class="center-login">
         <h3 style="margin-bottom: 15px; color: var(--navy); font-size: 16px;">MASUKKAN PASSWORD ACCESS</h3>
         <div class="form-group">
@@ -249,7 +246,6 @@
         <button class="btn-action" id="loginBtn">LOGIN</button>
     </div>
 
-    <!-- STEP 2: FORM SIMULASI (SETELAH LOGIN) -->
     <div id="loginBox" class="center-login hidden">
         <div style="margin-bottom:20px; font-size:13px; color:#475569; background: #f8fafc; padding: 8px 16px; border-radius: 20px; border: 1px solid #e2e8f0;">
             Masa Akses Berakhir: <b id="countdownDisplay" style="color:var(--danger);">Loading...</b>
@@ -261,7 +257,7 @@
         </div>
 
         <div class="form-group">
-            <label class="form-label">Pilih Set Gambar Soal: <br><span>(Klik menu di bawah untuk mengganti variasi soal)</span></label>
+            <label class="form-label">Pilih Set Gambar Soal:</label>
             <select id="kategoriSoal">
                 <option value="tanaman">🌱 Set Tanaman & Pohon</option>
                 <option value="hewan_laut">🐋 Set Hewan Laut</option>
@@ -270,7 +266,7 @@
                 <option value="pohon">🌲 Set Pohon & Hutan</option>
                 <option value="hewan">🦁 Set Hewan Darat</option>
                 <option value="manusia">👤 Set Siluet Manusia</option>
-                <option value="emoji_jelas">😀 Set Emoji Ekspresi</option>
+                <option value="emoji_jelas">😀 Set Emoji Ekspresi (Siluet Pekat Jelas)</option>
                 <option value="simbol">★ Set Simbol & Bentuk Klasik</option>
                 <option value="mix">🌀 Set Mix Gambar</option>
             </select>
@@ -444,6 +440,7 @@
         return arr;
     }
 
+    /* DATABASE SET EMOJI MENGGUNAKAN CLASS FontAwesome (SILUET PEKAT + CLEAR DETAIL) */
     const BANK_DATABASE = {
         tanaman: [
             ["🌵", "🌲", "🌳", "🌴", "🌱"], ["🌿", "☘️", "🍀", "🎍", "🌾"],
@@ -495,11 +492,16 @@
             ["🤸", "🚴‍♂️", "🚵‍♂️", "🤾‍♂️", "👤"], ["👥", "🕺", "💃", "🏃", "🚶"]
         ],
         emoji_jelas: [
-            ["😀", "😃", "😄", "😁", "😆"], ["😅", "😂", "🤣", "🥲", "☺️"],
-            ["😊", "😇", "🙂", "🙃", "😉"], ["😌", "😍", "🥰", "😘", "😗"],
-            ["😙", "😚", "😋", "😛", "😝"], ["😜", "🤪", "🤨", "🧐", "🤓"],
-            ["😎", "🥸", "🤩", "🥳", "😏"], ["😒", "😞", "😔", "😟", "😕"],
-            ["🙁", "☹️", "😣", "😖", "😫"], ["😩", "🥺", "😢", "😭", "😤"]
+            ["fa-solid fa-face-smile", "fa-solid fa-face-laugh", "fa-solid fa-face-grin-beam", "fa-solid fa-face-surprise", "fa-solid fa-face-sad-tear"],
+            ["fa-solid fa-face-angry", "fa-solid fa-face-flushed", "fa-solid fa-face-grimace", "fa-solid fa-face-kiss-wink-heart", "fa-solid fa-face-rolling-eyes"],
+            ["fa-solid fa-face-tired", "fa-solid fa-face-dizzy", "fa-solid fa-face-grin-tongue", "fa-solid fa-face-laugh-squint", "fa-solid fa-face-frown-open"],
+            ["fa-solid fa-face-grin-stars", "fa-solid fa-face-meh-blank", "fa-solid fa-face-sad-cry", "fa-solid fa-face-smile-wink", "fa-solid fa-face-laugh-beam"],
+            ["fa-solid fa-face-angry", "fa-solid fa-face-smile", "fa-solid fa-face-surprise", "fa-solid fa-face-grimace", "fa-solid fa-face-dizzy"],
+            ["fa-solid fa-face-flushed", "fa-solid fa-face-sad-tear", "fa-solid fa-face-grin-beam", "fa-solid fa-face-laugh", "fa-solid fa-face-rolling-eyes"],
+            ["fa-solid fa-face-kiss-wink-heart", "fa-solid fa-face-tired", "fa-solid fa-face-frown-open", "fa-solid fa-face-grin-tongue", "fa-solid fa-face-meh-blank"],
+            ["fa-solid fa-face-grin-stars", "fa-solid fa-face-sad-cry", "fa-solid fa-face-smile-wink", "fa-solid fa-face-laugh-squint", "fa-solid fa-face-smile"],
+            ["fa-solid fa-face-surprise", "fa-solid fa-face-angry", "fa-solid fa-face-flushed", "fa-solid fa-face-laugh-beam", "fa-solid fa-face-grimace"],
+            ["fa-solid fa-face-sad-tear", "fa-solid fa-face-kiss-wink-heart", "fa-solid fa-face-grin-beam", "fa-solid fa-face-tired", "fa-solid fa-face-smile-wink"]
         ],
         simbol: [
             ["★", "✦", "♠", "♣", "♥"], ["♦", "▲", "▼", "◆", "■"],
@@ -509,19 +511,17 @@
             ["⬟", "⬢", "▲", "▼", "■"], ["★", "✦", "♠", "♣", "●"]
         ],
         mix: [
-            ["🌲", "🐋", "🏠", "🦅", "🦁"], ["👤", "😀", "★", "🌵", "🐬"],
-            ["🏢", "🦆", "🐯", "👥", "😃"], ["✦", "🌻", "🐙", "🏥", "🦉"],
-            ["🦒", "🏃", "😄", "♠", "🌹"], ["🦑", "🏦", "🦇", "🐘", "🚶"],
-            ["😁", "♣", "🌷", "🦀", "🏨"], ["🦤", "🦏", "🕺", "😆", "♥"],
-            ["🌼", "🦞", "🏪", "🦩", "🦛"], ["💃", "😅", "♦", "🌴", "🦈"]
+            ["🌲", "🐋", "🏠", "🦅", "🦁"], ["👤", "fa-solid fa-face-smile", "★", "🌵", "🐬"],
+            ["🏢", "🦆", "🐯", "👥", "fa-solid fa-face-laugh"], ["✦", "🌻", "🐙", "🏥", "🦉"],
+            ["🦒", "🏃", "fa-solid fa-face-surprise", "♠", "🌹"], ["🦑", "🏦", "🦇", "🐘", "🚶"],
+            ["fa-solid fa-face-angry", "♣", "🌷", "🦀", "🏨"], ["🦤", "🦏", "🕺", "fa-solid fa-face-sad-tear", "♥"],
+            ["🌼", "🦞", "🏪", "🦩", "🦛"], ["💃", "fa-solid fa-face-flushed", "♦", "🌴", "🦈"]
         ]
     };
 
     let datasetGlobal = [];
     const JUMLAH_KOLOM = 10;
     const DURASI_KOLOM = 60;
-    const TOTAL_SOAL = 50;
-
     let idxKolom = 0, idxSoal = 0, timerVal = DURASI_KOLOM, timerId = null;
     let dataHasil = [];
     let setAktif = [], urutanOpsiData = [];
@@ -529,15 +529,12 @@
 
     const labels = ["A","B","C","D","E"];
 
-    function getSymbolClass(ch) {
-        if (/[\u{1F300}-\u{1F6FF}\u{1F900}-\u{1F9FF}\u{1F600}-\u{1F64F}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/u.test(ch)) {
-            return "symbol-emoji";
-        }
-        return "symbol-black";
-    }
-
+    // DETEKSI UNTUK MERENDER GAMBAR ATAU IKON EMOJI
     function renderSymbolHtml(ch) {
-        return `<span class="${getSymbolClass(ch)}">${ch}</span>`;
+        if (ch.startsWith("fa-")) {
+            return `<i class="${ch} emoji-icon"></i>`;
+        }
+        return `<span class="symbol-black">${ch}</span>`;
     }
 
     function startLogin(){
@@ -709,7 +706,6 @@
         let mean = (totalBenar / JUMLAH_KOLOM).toFixed(1);
         let maxVal = Math.max(...listBenar);
         let minVal = Math.min(...listBenar);
-        let deviasi = (maxVal - minVal);
         
         let sumSquaredDiff = listBenar.reduce((acc, val) => acc + Math.pow(val - mean, 2), 0);
         let stdDev = Math.sqrt(sumSquaredDiff / JUMLAH_KOLOM).toFixed(2);
