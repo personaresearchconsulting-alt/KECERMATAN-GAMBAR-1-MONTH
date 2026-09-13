@@ -60,6 +60,7 @@
             min-height: 92vh;
         }
         
+        /* Filter Siluet untuk Gambar/Simbol Biasa */
         .symbol-black { 
             display: inline-block;
             line-height: 1;
@@ -67,6 +68,16 @@
             font-family: 'Noto Color Emoji', sans-serif;
             filter: grayscale(100%) brightness(0) contrast(200%);
             -webkit-filter: grayscale(100%) brightness(0) contrast(200%);
+        }
+
+        /* Filter Hitam Putih Khusus Emoji (Mempertahankan Detail Ekspresi Mata & Mulut) */
+        .symbol-emoji {
+            display: inline-block;
+            line-height: 1;
+            vertical-align: middle;
+            font-family: 'Noto Color Emoji', sans-serif;
+            filter: grayscale(100%) contrast(150%) brightness(0.9);
+            -webkit-filter: grayscale(100%) contrast(150%) brightness(0.9);
         }
 
         header{text-align:center; margin-bottom:15px;}
@@ -259,7 +270,7 @@
                 <option value="pohon">🌲 Set Pohon & Hutan</option>
                 <option value="hewan">🦁 Set Hewan Darat</option>
                 <option value="manusia">👤 Set Siluet Manusia</option>
-                <option value="emoji_jelas">😀 Set Emoji Ekspresi (Universal)</option>
+                <option value="emoji_jelas">😀 Set Emoji Ekspresi (Hitam Putih)</option>
                 <option value="simbol">★ Set Simbol & Bentuk Klasik</option>
                 <option value="mix">🌀 Set Mix Gambar (Kombinasi Kategori Visual)</option>
             </select>
@@ -451,221 +462,379 @@
         bangunan: [
             ["🏠", "🏡", "🏢", "🏣", "🏥"], ["🏦", "🏨", "🏩", "🏪", "🏫"],
             ["🏬", "🏭", "🏯", "🏰", "💒"], ["🗼", "🗽", "⛪", "🕌", "🛕"],
-            ["🕍", "⛩️", "🕋", "🏛️", "🏗️"], ["🏠", "🏢", "🏥", "🏦", "🏰"],
-            ["🏪", "🏭", "🗼", "🗽", "⛪"], ["🕌", "⛩️", "🏛️", "🏗️", "🏫"],
-            ["🏡", "🏨", "🏯", "💒", "🛕"], ["🏠", "🏦", "🗼", "🏛️", "🏢"]
+            ["⛩️", "🏛️", "🛖", "🏡", "🏢"], ["🏣", "🏥", "🏦", "🏨", "🏪"],
+            ["🏫", "🏬", "🏭", "🏯", "🏰"], ["💒", "🗼", "🗽", "⛪", "🕌"],
+            ["🛕", "⛩️", "🏛️", "🛖", "🏠"], ["🏢", "🏦", "🏫", "🏰", "🏛️"]
         ],
         burung: [
-            ["🦅", "🦉", "🦆", "🦢", "🦩"], ["🦚", "🦜", "🦤", "🪶", "🐓"],
-            ["🐔", "🐣", "🐤", "🐥", "🕊️"], ["🐧", "🦅", "🦉", "🦆", "🦩"],
-            ["🦚", "🦜", "🪶", "🐓", "🕊️"], ["🦅", "🦆", "🦚", "🦤", "🐣"],
-            ["🦉", "🦩", "🦜", "🐓", "🕊️"], ["🦅", "🦉", "🦚", "🦜", "🦤"],
-            ["🦆", "🦩", "🪶", "🐓", "🕊️"], ["🦅", "🦚", "🦜", "🦉", "🕊️"]
+            ["🦅", "🦆", "🦉", "🦇", "🦤"], ["🦩", "🦚", "🦜", "🕊️", "🦤"],
+            ["🦢", "🦩", "🦚", "🦜", "🕊️"], ["🦅", "🦆", "🦉", "🦇", "🦢"],
+            ["🕊️", "🦜", "🦚", "🦩", "🦤"], ["🦅", "🦉", "🦆", "🦇", "🦢"],
+            ["🦚", "🦜", "🕊️", "🦩", "🦅"], ["🦉", "🦇", "🦤", "🦢", "🦆"],
+            ["🦜", "🦚", "🦅", "🦉", "🕊️"], ["🦆", "🦇", "🦤", "🦩", "🦢"]
         ],
         pohon: [
-            ["🌲", "🌳", "🌴", "🌵", "🎋"], ["🪵", "🌱", "🌿", "☘️", "🍀"],
-            ["🍁", "🍂", "🍃", "🪴", "🌲"], ["🌳", "🌴", "🌵", "🎋", "🪵"],
-            ["🌱", "🌿", "🍀", "🍁", "🍂"], ["🌲", "🌴", "🪵", "🌿", "🍃"],
-            ["🌳", "🌵", "🌱", "🍀", "🪴"], ["🎋", "🍁", "🍂", "🌲", "🌳"],
-            ["🌴", "🌵", "🪵", "🌿", "🍃"], ["🌲", "🌳", "🌴", "🌱", "🌿"]
+            ["🌲", "🌳", "🌴", "🌱", "🌿"], ["🌵", "🎍", "🌾", "🪴", "🍃"],
+            ["🌳", "🌲", "🌴", "🌵", "🌿"], ["🌱", "🎍", "🌾", "🪴", "🍃"],
+            ["🌴", "🌲", "🌳", "🌿", "🌱"], ["🪴", "🌵", "🎍", "🌾", "🍃"],
+            ["🌲", "🌴", "🌵", "🪴", "🌳"], ["🌿", "🌱", "🎍", "🌾", "🍃"],
+            ["🌳", "🌴", "🌲", "🌱", "🪴"], ["🌵", "🌿", "🎍", "🌾", "🍃"]
         ],
         hewan: [
-            ["🦁", "🐯", "🐱", "🐶", "🐺"], ["🦊", "🦝", "🐮", "🐷", "🐗"],
-            ["🐭", "🐹", "🐰", "🐻", "🐼"], ["🐨", "🐯", "🦁", "🐮", "🐷"],
-            ["🐺", "🦊", "🦝", "🐻", "🐼"], ["🐱", "🐶", "🐭", "🐰", "🐨"],
-            ["🦁", "🦊", "🐮", "🐰", "🐼"], ["🐯", "🦝", "🐷", "🐻", "🐨"],
-            ["🐶", "🐺", "🐭", "🐹", "🦁"], ["🦁", "🐯", "🦊", "🐻", "🐼"]
+            ["🦁", "🐯", "🦒", "🐘", "🦏"], ["🦛", "🐪", "🐫", "🦘", "🦬"],
+            ["🐂", "🐃", "🐄", "🐎", "🐖"], ["🐏", "🐑", "🦙", "🐐", "🦌"],
+            ["🐕", "🐩", "🦮", "🐕‍🦺", "🐈"], ["🐈‍⬛", "🦝", "🦡", "🦫", "🦦"],
+            ["🦥", "🦘", "🦡", "🐁", "🐀"], ["🐿️", "🦔", "🐇", "🐿️", "🐆"],
+            ["🐅", "🐊", "🐢", "🦎", "🐍"], ["🐉", "🦕", "🦖", "🦣", "🐒"]
         ],
         manusia: [
-            ["👤", "👥", "🏃", "🚶", "🧍"], ["🧎", "🕺", "💃", "🧗", "🤺"],
-            ["👮", "🕵️", "🥷", "👷", "💂"], ["🤴", "👸", "👳", "👲", "🧕"],
-            ["👤", "🏃", "🧍", "🕺", "👮"], ["👥", "🚶", "🧎", "💃", "🕵️"],
-            ["🧗", "🤺", "🏃", "👷", "💂"], ["👤", "🧍", "🕺", "👮", "💂"],
-            ["🏃", "🚶", "💃", "🕵️", "🥷"], ["👥", "🧍", "🧗", "👮", "👷"]
+            ["👤", "👥", "🏃", "🚶", "🕺"], ["💃", "🧗", "🧘", "🏋️", "🤸"],
+            ["🚴", "🚵", "🤾", "🏌️", "🏇"], ["🧘‍♀️", "🧘‍♂️", "🚶‍♂️", "🏃‍♂️", "👤"],
+            ["👥", "🕺", "💃", "🧗", "🤸"], ["🏋️", "🤾", "🚴", "🏇", "🏌️"],
+            ["🚶‍♀️", "🏃‍♀️", "👤", "👥", "🕺"], ["💃", "🧘‍♀️", "🧘‍♂️", "🏋️", "🧗"],
+            ["🤸", "🚴‍♂️", "🚵‍♂️", "🤾‍♂️", "👤"], ["👥", "🕺", "💃", "🏃", "🚶"]
         ],
         emoji_jelas: [
-            ["😀", "😃", "😄", "😁", "😆"], ["😅", "😂", "🤣", "😊", "😇"],
-            ["🙂", "🙃", "😉", "😌", "😍"], ["🥰", "😘", "😗", "😙", "😚"],
-            ["😋", "😛", "😝", "😜", "🤪"], ["🤨", "🧐", "🤓", "😎", "🤩"],
-            ["🥳", "😏", "😒", "😞", "😔"], ["😟", "😕", "🙁", "☹️", "😣"],
-            ["😖", "😫", "😩", "🥺", "😢"], ["😭", "😤", "😠", "😡", "🤬"]
+            ["😀", "😃", "😄", "😁", "😆"], ["😅", "😂", "🤣", "🥲", "☺️"],
+            ["😊", "😇", "🙂", "🙃", "😉"], ["😌", "😍", "🥰", "😘", "😗"],
+            ["😙", "😚", "😋", "😛", "😝"], ["😜", "🤪", "🤨", "🧐", "🤓"],
+            ["😎", "🥸", "🤩", "🥳", "😏"], ["😒", "😞", "😔", "😟", "😕"],
+            ["🙁", "☹️", "😣", "😖", "😫"], ["😩", "🥺", "😢", "😭", "😤"]
         ],
         simbol: [
-            ["★", "▲", "■", "●", "◆"], ["✦", "▼", "▰", "◯", "◈"],
-            ["★", "✦", "▲", "▼", "◼"], ["●", "◯", "◆", "◈", "✦"],
-            ["▲", "■", "●", "★", "✦"], ["▼", "▰", "◯", "◆", "◈"],
-            ["★", "▲", "◆", "●", "▼"], ["✦", "■", "◈", "◯", "▰"],
-            ["▲", "▼", "★", "✦", "■"], ["●", "◯", "◆", "◈", "▰"]
+            ["★", "✦", "♠", "♣", "♥"], ["♦", "▲", "▼", "◆", "■"],
+            ["●", "⬟", "⬢", "⬣", "➕"], ["✖", "➗", "◼", "◻", "◾"],
+            ["◽", "▲", "△", "▶", "◀"], ["★", "☆", "♠", "♤", "♣"],
+            ["♧", "♥", "♡", "♦", "♢"], ["◈", "◇", "◆", "○", "◎"],
+            ["⬟", "⬢", "▲", "▼", "■"], ["★", "✦", "♠", "♣", "●"]
         ],
-        // SET MIX TERBARU (MURNI GAMBAR / VISUAL AMBIGU & VARIASI KATEGORI)
         mix: [
-            ["🌵", "🏠", "🦁", "⛵", "★"], ["🐬", "🌲", "👤", "🚀", "▲"],
-            ["🚗", "🌴", "🦅", "🗿", "■"], ["🍕", "⛪", "🐙", "👑", "●"],
-            ["🚁", "🍁", "🦊", "🕌", "◆"], ["⚽", "🏖️", "🦉", "🎪", "✦"],
-            ["🚲", "🍄", "🦭", "🏰", "▼"], ["🎸", "🌻", "🐧", "🗽", "◯"],
-            ["🏆", "🪵", "🦚", "⛩️", "◈"], ["💎", "🪴", "🦄", "🏛️", "▰"]
+            ["🌲", "🐋", "🏠", "🦅", "🦁"], ["👤", "😀", "★", "🌵", "🐬"],
+            ["🏢", "🦆", "🐯", "👥", "😃"], ["✦", "🌻", "🐙", "🏥", "🦉"],
+            ["🦒", "🏃", "😄", "♠", "🌹"], ["🦑", "🏦", "🦇", "🐘", "🚶"],
+            ["😁", "♣", "🌷", "🦀", "🏨"], ["🦤", "🦏", "🕺", "😆", "♥"],
+            ["🌼", "🦞", "🏪", "🦩", "🦛"], ["💃", "😅", "♦", "🌴", "🦈"]
         ]
     };
 
-    let MASTER_BANK = [];
-    let currentIdx = 0, timerLeft = 60, interval = null, results = [], pName = "", activeChars = [];
+    let datasetGlobal = [];
+    const JUMLAH_KOLOM = 10;
+    const DURASI_KOLOM = 60;
+    const TOTAL_SOAL = 50;
 
-    function startLogin() {
-        const u = document.getElementById('username').value.trim();
-        if(!u) return showPopup('Nama wajib diisi!');
-        
-        const katKey = document.getElementById('kategoriSoal').value;
-        MASTER_BANK = BANK_DATABASE[katKey].map(set => shuffleArray(set));
-        MASTER_BANK = shuffleArray(MASTER_BANK);
-        
-        pName = u;
-        document.getElementById('loginBox').style.display = 'none';
-        triggerCountdown();
+    let idxKolom = 0, idxSoal = 0, timerVal = DURASI_KOLOM, timerId = null;
+    let dataHasil = [];
+    let setAktif = [], urutanOpsiData = [];
+    let namaPeserta = "";
+
+    const labels = ["A","B","C","D","E"];
+
+    function getSymbolClass(ch) {
+        if (/[\u{1F300}-\u{1F6FF}\u{1F900}-\u{1F9FF}\u{1F600}-\u{1F64F}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/u.test(ch)) {
+            return "symbol-emoji";
+        }
+        return "symbol-black";
     }
 
-    function triggerCountdown() {
-        document.getElementById('testArea').style.display = 'none';
-        const overlay = document.getElementById('prepOverlay');
-        const countText = document.getElementById('countdownText');
-        overlay.style.display = 'flex';
-        let count = 3; countText.textContent = count;
-        let t = setInterval(() => {
-            count--; 
-            if(count > 0) countText.textContent = count;
-            else { clearInterval(t); overlay.style.display = 'none'; startCol(); }
-        }, 1000);
+    function renderSymbolHtml(ch) {
+        return `<span class="${getSymbolClass(ch)}">${ch}</span>`;
     }
 
-    function startCol() {
-        activeChars = shuffleArray([...MASTER_BANK[currentIdx]]);
-        timerLeft = 60;
-        if(!results[currentIdx]) results.push({t:0, b:0, s:0});
+    function startLogin(){
+        const namaInput = document.getElementById('username').value.trim();
+        if(!namaInput){
+            showPopup("Silakan masukkan nama lengkap!");
+            return;
+        }
         
-        document.getElementById('topRow').style.display = 'flex';
-        document.getElementById('testArea').style.display = 'flex';
-        document.getElementById('kolomInfo').textContent = `KOLOM: ${currentIdx + 1} / 10`;
-        
-        document.getElementById('topRow').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        namaPeserta = namaInput;
+        const kat = document.getElementById("kategoriSoal").value;
+        const bankData = BANK_DATABASE[kat] || BANK_DATABASE["tanaman"];
 
-        let hSimbol = '', hLabel = '';
-        activeChars.forEach((c, i) => {
-            hSimbol += `<td><span class="symbol-black">${c}</span></td>`;
-            hLabel += `<td class="label">${String.fromCharCode(65+i)}</td>`;
-        });
-        document.getElementById('rowSimbol').innerHTML = hSimbol;
-        document.getElementById('rowLabel').innerHTML = hLabel;
-
-        nextSoal();
-        if(interval) clearInterval(interval);
-        interval = setInterval(() => {
-            timerLeft--;
-            document.getElementById('timer').textContent = `00:${String(timerLeft).padStart(2,'0')}`;
-            if(timerLeft <= 0) {
-                clearInterval(interval);
-                currentIdx++;
-                if(currentIdx < 10) triggerCountdown(); else showFinal();
-            }
-        }, 1000);
-    }
-
-    function nextSoal() {
-        const missingIdx = Math.floor(Math.random() * 5);
-        const correctLabel = String.fromCharCode(65 + missingIdx);
-
-        const display = [];
-        for (let i = 0; i < activeChars.length; i++) {
-            if (i !== missingIdx) {
-                display.push(activeChars[i]);
-            }
+        datasetGlobal = [];
+        for(let i=0; i<JUMLAH_KOLOM; i++){
+            datasetGlobal.push(bankData[i % bankData.length]);
         }
 
-        const shuffledDisplay = shuffleArray(display);
-
-        const soalCont = document.getElementById('soalCont');
-        soalCont.innerHTML = shuffledDisplay
-            .map(s => `<span class="symbol-black">${s}</span>`)
-            .join('');
-
-        const cont = document.getElementById('pilihan');
-        cont.innerHTML = '';
-        const labels = ['A', 'B', 'C', 'D', 'E'];
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("mainHeader").style.display = "none";
         
-        labels.forEach((l) => {
-            const btn = document.createElement('button');
-            btn.className = 'pilihan-btn';
-            btn.textContent = l;
-            btn.onclick = () => { 
-                results[currentIdx].t++; 
-                if(l === correctLabel) {
-                    results[currentIdx].b++; 
-                } else {
-                    results[currentIdx].s++; 
-                }
-                nextSoal(); 
-            };
-            cont.appendChild(btn);
-        });
+        let prepOverlay = document.getElementById("prepOverlay");
+        let countdownText = document.getElementById("countdownText");
+        prepOverlay.style.display = "flex";
+        
+        let count = 3;
+        countdownText.innerText = count;
+        
+        let prepTimer = setInterval(()=>{
+            count--;
+            if(count > 0){
+                countdownText.innerText = count;
+            } else {
+                clearInterval(prepTimer);
+                prepOverlay.style.display = "none";
+                document.getElementById("topRow").style.display = "flex";
+                document.getElementById("testArea").style.display = "flex";
+                initKolom();
+            }
+        }, 1000);
     }
 
-    function showFinal() {
-        document.getElementById('testArea').style.display = 'none';
-        document.getElementById('topRow').style.display = 'none';
-        document.getElementById('resultArea').style.display = 'block';
-        document.getElementById('resName').textContent = pName;
+    function initKolom(){
+        if(idxKolom >= JUMLAH_KOLOM){
+            selesaiTest();
+            return;
+        }
+
+        idxSoal = 0;
+        dataHasil[idxKolom] = { terjawab:0, benar:0, salah:0 };
+        document.getElementById("kolomInfo").innerText = `KOLOM: ${idxKolom + 1} / ${JUMLAH_KOLOM}`;
+
+        setAktif = [...datasetGlobal[idxKolom]];
+        let paired = setAktif.map((sym, i) => ({ sym: sym, label: labels[i] }));
+        paired = shuffleArray(paired);
         
-        document.getElementById('mainHeader').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        let rowSimbolHtml = "";
+        let rowLabelHtml = "";
+        urutanOpsiData = [];
 
-        const terjawab = results.map(r => r.t);
-        const totalB = results.reduce((a, b) => a + b.b, 0);
-        const totalS = results.reduce((a, b) => a + b.s, 0);
-        const minK = Math.min(...terjawab);
-        const maxK = Math.max(...terjawab);
-        const range = maxK - minK;
-        const skorTotal = ((totalB / 500) * 100).toFixed(2);
-        const nilaiFix = (skorTotal * 0.4).toFixed(2);
+        paired.forEach(item => {
+            rowSimbolHtml += `<td>${renderSymbolHtml(item.sym)}</td>`;
+            rowLabelHtml += `<td class="label">${item.label}</td>`;
+            urutanOpsiData.push(item);
+        });
 
-        document.getElementById('summaryBox').innerHTML = `
-            <div class="card-skor"><b>KECEPATAN (MIN)</b><div class="val-skor">${minK}</div><span class="kat-badge ${minK>=20?'bg-sukses':'bg-bahaya'}">${minK>=20?'BAIK':'KURANG'}</span></div>
-            <div class="card-skor"><b>KETELITIAN (SALAH)</b><div class="val-skor">${totalS}</div><span class="kat-badge ${totalS<=5?'bg-sukses':'bg-bahaya'}">${totalS<=5?'TELITI':'RENDAH'}</span></div>
-            <div class="card-skor"><b>KESTABILAN (RANGE)</b><div class="val-skor">${range}</div><span class="kat-badge ${range<=5?'bg-sukses':'bg-bahaya'}">${range<=5?'STABIL':'LABIL'}</span></div>
-            <div class="card-skor"><b>SKOR TOTAL</b><div class="val-skor">${skorTotal}</div></div>
-            <div class="card-akhir card-skor"><b>NILAI AKHIR (X0.4)</b><div class="val-skor">${nilaiFix}</div></div>
+        document.getElementById("rowSimbol").innerHTML = rowSimbolHtml;
+        document.getElementById("rowLabel").innerHTML = rowLabelHtml;
+
+        renderPilihanButtons();
+        generateSoal();
+        resetTimer();
+    }
+
+    function renderPilihanButtons(){
+        let html = "";
+        labels.forEach(lbl => {
+            html += `<button class="pilihan-btn" onclick="jawab('${lbl}')">${lbl}</button>`;
+        });
+        document.getElementById("pilihan").innerHTML = html;
+    }
+
+    let jawabanBenarAktif = "";
+
+    function generateSoal(){
+        let hilangkanIdx = Math.floor(Math.random() * 5);
+        jawabanBenarAktif = urutanOpsiData[hilangkanIdx].label;
+
+        let empatsimbol = [];
+        for(let i=0; i<5; i++){
+            if(i !== hilangkanIdx){
+                empatsimbol.push(urutanOpsiData[i].sym);
+            }
+        }
+        empatsimbol = shuffleArray(empatsimbol);
+
+        let soalHtml = "";
+        empatsimbol.forEach(sym => {
+            soalHtml += renderSymbolHtml(sym);
+        });
+        document.getElementById("soalCont").innerHTML = soalHtml;
+    }
+
+    function jawab(pilihanUser){
+        dataHasil[idxKolom].terjawab++;
+        if(pilihanUser === jawabanBenarAktif){
+            dataHasil[idxKolom].benar++;
+        } else {
+            dataHasil[idxKolom].salah++;
+        }
+        idxSoal++;
+        generateSoal();
+    }
+
+    function resetTimer(){
+        clearInterval(timerId);
+        timerVal = DURASI_KOLOM;
+        updateTimerDisplay();
+        
+        timerId = setInterval(()=>{
+            timerVal--;
+            updateTimerDisplay();
+            if(timerVal <= 0){
+                clearInterval(timerId);
+                idxKolom++;
+                initKolom();
+            }
+        }, 1000);
+    }
+
+    function updateTimerDisplay(){
+        let sec = timerVal < 10 ? "0" + timerVal : timerVal;
+        document.getElementById("timer").innerText = `00:${sec}`;
+    }
+
+    function selesaiTest(){
+        clearInterval(timerId);
+        document.getElementById("topRow").style.display = "none";
+        document.getElementById("testArea").style.display = "none";
+        document.getElementById("mainHeader").style.display = "block";
+        document.getElementById("resultArea").style.display = "block";
+
+        document.getElementById("resName").innerText = namaPeserta;
+
+        let totalBenar = 0;
+        let totalSalah = 0;
+        let listBenar = [];
+
+        let tbody = "";
+        for(let i=0; i<JUMLAH_KOLOM; i++){
+            let res = dataHasil[i] || { terjawab:0, benar:0, salah:0 };
+            let diff = (i === 0) ? 0 : res.benar - dataHasil[i-1].benar;
+            let diffStr = (i === 0) ? "-" : (diff > 0 ? `+${diff}` : `${diff}`);
+            
+            totalBenar += res.benar;
+            totalSalah += res.salah;
+            listBenar.push(res.benar);
+
+            tbody += `<tr>
+                <td>Kolom ${i+1}</td>
+                <td>${res.terjawab}</td>
+                <td><b style="color:green">${res.benar}</b></td>
+                <td><b style="color:red">${res.salah}</b></td>
+                <td>${diffStr}</td>
+            </tr>`;
+        }
+        document.getElementById("tbodyHasil").innerHTML = tbody;
+
+        let mean = (totalBenar / JUMLAH_KOLOM).toFixed(1);
+        let maxVal = Math.max(...listBenar);
+        let minVal = Math.min(...listBenar);
+        let deviasi = (maxVal - minVal);
+        
+        let sumSquaredDiff = listBenar.reduce((acc, val) => acc + Math.pow(val - mean, 2), 0);
+        let stdDev = Math.sqrt(sumSquaredDiff / JUMLAH_KOLOM).toFixed(2);
+
+        let kesimpulan = "";
+        let katPace = "", katStabilitas = "", katKetahanan = "";
+
+        if(mean >= 40) katPace = "<b style='color:green;'>SANGAT TINGGI (Sangat Cepat)</b>";
+        else if(mean >= 30) katPace = "<b style='color:green;'>TINGGI (Cepat)</b>";
+        else if(mean >= 20) katPace = "<b style='color:orange;'>CUKUP (Rata-rata)</b>";
+        else katPace = "<b style='color:red;'>KURANG (Lambat)</b>";
+
+        if(stdDev <= 2.5) katStabilitas = "<b style='color:green;'>SANGAT STABIL</b>";
+        else if(stdDev <= 4.5) katStabilitas = "<b style='color:orange;'>CUKUP STABIL</b>";
+        else katStabilitas = "<b style='color:red;'>FLUKTUATIF / TIDAK STABIL</b>";
+
+        let awal = (listBenar[0] + listBenar[1] + listBenar[2]) / 3;
+        let akhir = (listBenar[7] + listBenar[8] + listBenar[9]) / 3;
+        let tren = akhir - awal;
+
+        if(tren > 1.5) katKetahanan = "<b style='color:green;'>MENINGKAT (Stamina & Daya Tahan Bagus)</b>";
+        else if(tren >= -1.5) katKetahanan = "<b style='color:green;'>STABIL (Daya Tahan Kerja Konsisten)</b>";
+        else katKetahanan = "<b style='color:red;'>MENURUN (Indikasi Cepat Lelah / Kehilangan Fokus)</b>";
+
+        kesimpulan = `
+            • <b>Kecepatan Kerja (Pace):</b> Rata-rata berhasil menyelesaikan <b>${mean}</b> soal per menit. Kapasitas kecepatan Anda masuk kategori ${katPace}.<br>
+            • <b>Konsistensi & Stabilitas:</b> Tingkat deviasi ritme kerja sebesar <b>${stdDev}</b>. Menunjukkan emosi dan konsentrasi kerja yang ${katStabilitas}.<br>
+            • <b>Daya Tahan (Stamina Kerja):</b> Grafis kerja dari awal hingga akhir cenderung ${katKetahanan}.<br>
+            • <b>Ketelitian (Akurasi):</b> Dari total soal yang dikerjakan, terdapat <b>${totalSalah} kesalahan</b>.
         `;
 
-        let narasi = `Berdasarkan hasil simulasi, saudara ${pName} memiliki kecepatan kerja minimal ${minK} soal/menit. `;
-        narasi += totalS <= 5 ? "Tingkat ketelitian Anda sangat baik (High Precision). " : "Anda perlu melatih ketelitian karena ditemukan kesalahan di atas ambang batas. ";
-        narasi += range <= 5 ? "Grafik menunjukkan stabilitas emosi dan daya tahan stres yang sangat baik." : "Grafik fluktuatif menunjukkan adanya penurunan konsentrasi pada periode tertentu.";
-        document.getElementById('kesimpulanNarasi').textContent = narasi;
+        document.getElementById("kesimpulanNarasi").innerHTML = kesimpulan;
 
-        let h = '';
-        results.forEach((r, i) => { 
-            let fluk = i === 0 ? 0 : r.t - results[i-1].t;
-            h += `<tr><td>${i+1}</td><td>${r.t}</td><td>${r.b}</td><td>${r.s}</td><td>${fluk > 0 ? '+'+fluk : fluk}</td></tr>`; 
-        });
-        document.getElementById('tbodyHasil').innerHTML = h;
+        document.getElementById("summaryBox").innerHTML = `
+            <div class="card-skor card-akhir">
+                <b>TOTAL SKOR BENAR</b>
+                <div class="val-skor">${totalBenar}</div>
+            </div>
+            <div class="card-skor">
+                <b>RATA-RATA (KECEPATAN)</b>
+                <div class="val-skor">${mean}</div>
+            </div>
+            <div class="card-skor">
+                <b>DEVIASI (STABILITAS)</b>
+                <div class="val-skor">±${stdDev}</div>
+            </div>
+            <div class="card-skor">
+                <b>TOTAL SALAH (KETELITIAN)</b>
+                <div class="val-skor" style="color:var(--danger);">${totalSalah}</div>
+            </div>
+        `;
 
-        new Chart(document.getElementById('chartPauli'), {
+        renderChart(listBenar);
+    }
+
+    function renderChart(dataPoints){
+        const ctx = document.getElementById('chartPauli').getContext('2d');
+        new Chart(ctx, {
             type: 'line',
             data: {
-                labels: [1,2,3,4,5,6,7,8,9,10],
-                datasets: [{ label: 'Kecepatan', data: terjawab, borderColor: '#0b2340', tension: 0.3, fill: true, backgroundColor: 'rgba(11,35,64,0.1)' }]
+                labels: ['K1', 'K2', 'K3', 'K4', 'K5', 'K6', 'K7', 'K8', 'K9', 'K10'],
+                datasets: [{
+                    label: 'Jumlah Benar Per Kolom',
+                    data: dataPoints,
+                    borderColor: '#0b2340',
+                    backgroundColor: 'rgba(11, 35, 64, 0.1)',
+                    fill: true,
+                    tension: 0.3,
+                    borderWidth: 3,
+                    pointRadius: 5,
+                    pointBackgroundColor: '#d4a017'
+                }]
             },
-            options: { maintainAspectRatio: false, plugins: { legend: { display: false } } }
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: false }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
         });
     }
 
-    async function downloadFullPDF() {
-        const btn = document.getElementById('btnDownload');
-        btn.style.display = 'none';
-        const element = document.getElementById('captureArea');
-        const canvas = await html2canvas(element, { scale: 2 });
-        const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF('p', 'mm', 'a4');
-        const w = pdf.internal.pageSize.getWidth();
-        const h = (canvas.height * w) / canvas.width;
-        pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, w, h);
-        pdf.save(`Hasil_Kecermatan_${pName}.pdf`);
-        btn.style.display = 'block';
+    async function downloadFullPDF(){
+        const btn = document.getElementById("btnDownload");
+        btn.style.display = "none";
+        showPopup("Merapikan dokumen PDF...");
+
+        const element = document.getElementById("captureArea");
+
+        try {
+            const canvas = await html2canvas(element, {
+                scale: 2,
+                useCORS: true,
+                logging: false,
+                backgroundColor: "#ffffff"
+            });
+
+            const imgData = canvas.toDataURL('image/png');
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = pdf.internal.pageSize.getHeight();
+            
+            const imgWidth = canvas.width;
+            const imgHeight = canvas.height;
+            const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+            
+            const imgX = (pdfWidth - imgWidth * ratio) / 2;
+            const imgY = 5;
+
+            pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+            
+            let safeName = namaPeserta.replace(/[^a-zA-Z0-9]/g, "_");
+            pdf.save(`Hasil_Kecermatan_Gambar_${safeName}.pdf`);
+            showPopup("PDF berhasil diunduh.");
+        } catch(err) {
+            showPopup("Gagal mengunduh PDF.");
+        } finally {
+            btn.style.display = "block";
+        }
     }
 </script>
 </body>
