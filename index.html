@@ -9,7 +9,7 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -71,28 +71,57 @@
 
         header{text-align:center; margin-bottom:15px;}
 
+        /* REVISI BRAND HEADER FONT */
+        .brand-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--navy);
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+            text-transform: uppercase;
+        }
+
         /* LOGIN / AUTH BOX */
         .center-login {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 40px 20px;
+            padding: 30px 20px;
             text-align: center;
+        }
+
+        .form-group {
+            width: 100%;
+            max-width: 340px;
+            text-align: left;
+            margin-bottom: 12px;
+        }
+
+        .form-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .form-label span {
+            color: #2563eb;
+            font-weight: 400;
         }
 
         input, select{
             padding:14px; 
             width:100%;
-            max-width:320px; 
             border:2px solid #cbd5e1; 
             border-radius:12px; 
-            font-size:15px; 
+            font-size:14px; 
             text-align:center; 
             outline:none; 
-            margin-bottom: 15px;
             background:#f8fafc;
         }
+        select { text-align-last: center; }
         input:focus, select:focus{ border-color:#2196f3; background:#fff; }
 
         .btn-action{
@@ -105,7 +134,8 @@
             cursor:pointer; 
             font-weight:600;
             width: 100%;
-            max-width: 320px;
+            max-width: 340px;
+            margin-top: 10px;
             transition: .3s;
         }
         .btn-action:hover{ transform:translateY(-2px); background:#163860; }
@@ -197,32 +227,45 @@
 
 <div class="wrap" id="captureArea">
     <header id="mainHeader">
-        <h1 style="font-size: 20px; color: var(--navy); margin:0;">TRYOUT TES KECERMATAN GAMBAR</h1>
-        <p style="font-size: 12px; color: #64748b; margin: 4px 0 0 0; font-weight: 600;">Persona Research & Consulting</p>
+        <h1 style="font-size: 16px; color: #64748b; margin:0; font-weight: 500;">TRYOUT TES KECERMATAN GAMBAR</h1>
+        <!-- NAMA BRAND DIPERBESAR DAN DIPERJELAS -->
+        <p class="brand-title">Persona Research & Consulting</p>
     </header>
 
     <!-- STEP 1: AUTHENTICATION PASSWORD -->
     <div id="authBox" class="center-login">
-        <h3 style="margin-bottom: 15px; color: var(--navy);">MASUKKAN PASSWORD ACCESS</h3>
-        <input type="password" id="accessPass" placeholder="Password..." autocomplete="off">
+        <h3 style="margin-bottom: 15px; color: var(--navy); font-size: 16px;">MASUKKAN PASSWORD ACCESS</h3>
+        <div class="form-group">
+            <input type="password" id="accessPass" placeholder="Password Kunci..." autocomplete="off">
+        </div>
         <button class="btn-action" id="loginBtn">LOGIN</button>
     </div>
 
     <!-- STEP 2: FORM SIMULASI (SETELAH LOGIN) -->
     <div id="loginBox" class="center-login hidden">
-        <div style="margin-bottom:15px; font-size:13px; color:#475569;">
+        <div style="margin-bottom:20px; font-size:13px; color:#475569; background: #f8fafc; padding: 8px 16px; border-radius: 20px; border: 1px solid #e2e8f0;">
             Masa Akses Berakhir: <b id="countdownDisplay" style="color:var(--danger);">Loading...</b>
         </div>
-        <input type="text" id="username" placeholder="Nama Lengkap Siswa..." autocomplete="off">
-        <select id="kategoriSoal">
-            <option value="tanaman">🌱 Set Tanaman & Pohon</option>
-            <option value="hewan_laut">🐋 Set Hewan Laut</option>
-            <option value="bangunan">🏠 Set Bangunan</option>
-            <option value="burung">🦅 Set Burung & Unggas</option>
-            <option value="pohon">🌲 Set Pohon & Hutan</option>
-            <option value="hewan">🦁 Set Hewan Darat</option>
-            <option value="manusia">👤 Set Siluet Manusia</option>
-        </select>
+
+        <div class="form-group">
+            <label class="form-label">Nama Lengkap Siswa:</label>
+            <input type="text" id="username" placeholder="Ketik nama lengkap..." autocomplete="off">
+        </div>
+
+        <!-- REVISI KETERANGAN PILIHAN SET SOAL -->
+        <div class="form-group">
+            <label class="form-label">Pilih Set Gambar Soal: <br><span>(Klik menu di bawah untuk mengganti variasi soal)</span></label>
+            <select id="kategoriSoal">
+                <option value="tanaman">🌱 Set Tanaman & Pohon</option>
+                <option value="hewan_laut">🐋 Set Hewan Laut</option>
+                <option value="bangunan">🏠 Set Bangunan</option>
+                <option value="burung">🦅 Set Burung & Unggas</option>
+                <option value="pohon">🌲 Set Pohon & Hutan</option>
+                <option value="hewan">🦁 Set Hewan Darat</option>
+                <option value="manusia">👤 Set Siluet Manusia</option>
+            </select>
+        </div>
+
         <button class="btn-action" onclick="startLogin()">MULAI SIMULASI</button>
     </div>
 
@@ -272,10 +315,8 @@
 </div>
 
 <script>
-    // URL Web App Apps Script
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxXC1m2C3j5RyBg9uNNjdcB7WZpSntBT_F_AcOv0mtfluMdxLhHyCp4N3pQi8mEeuZy/exec";
 
-    // 100 Password Resmi Prefix GBR (1 Bulan Akses)
     const passwordList = [
         'GBR0N', 'GBR0P', 'GBR0U', 'GBR1S', 'GBR1U', 'GBR1V', 'GBR1Z', 'GBR2T', 'GBR36', 'GBR3F', 
         'GBR43', 'GBR46', 'GBR4N', 'GBR5B', 'GBR5D', 'GBR6E', 'GBR6I', 'GBR7O', 'GBR8F', 'GBR8M', 
@@ -318,7 +359,6 @@
         return "PRC-"+Math.abs(hash);
     }
 
-    // LOGIN & SINKRONISASI
     document.getElementById("loginBtn").addEventListener("click", loginSystem);
 
     async function loginSystem(){
@@ -360,7 +400,6 @@
     function startCountdown(firstLoginTime){
         clearInterval(countdownInterval);
         countdownInterval = setInterval(()=>{
-            // Masa Aktif 1 Bulan (30 Hari)
             const end = firstLoginTime + (30 * 24 * 60 * 60 * 1000);
             const diff = end - Date.now();
 
@@ -380,14 +419,12 @@
         }, 1000);
     }
 
-    // AUTO-LOGIN CHECK
     const loggedUser = localStorage.getItem("loggedInUser");
     const localFirstLogin = localStorage.getItem("userFirstLogin");
     if(loggedUser && localFirstLogin && passwordList.includes(loggedUser)){
         openFormSimulasi(localFirstLogin);
     }
 
-    // SIMULASI TES LOGIC
     function shuffleArray(array) {
         let arr = [...array];
         for (let i = arr.length - 1; i > 0; i--) {
@@ -444,7 +481,7 @@
             ["👤", "👥", "🏃", "🚶", "🧍"], ["🧎", "🕺", "💃", "🧗", "🤺"],
             ["👮", "🕵️", "🥷", "👷"], ["🤴", "👸", "👳", "👲", "🧕"],
             ["👤", "🏃", "🧍", "🕺", "👮"], ["👥", "🚶", "🧎", "💃", "🕵️"],
-            ["🧗", "🤺", "💂", "🥷", "👷"], ["👤", "🧍", "🕺", "👮", "💂"],
+            ["🧗", "🤺", "🏃", "👷"], ["👤", "🧍", "🕺", "👮", "💂"],
             ["🏃", "🚶", "💃", "🕵️", "🥷"], ["👥", "🧍", "🧗", "👮", "👷"]
         ]
     };
